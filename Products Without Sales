@@ -1,0 +1,6 @@
+SELECT sku, product_name
+FROM PRODUCT
+WHERE id NOT IN (
+    SELECT DISTINCT product_id
+    FROM INVOICE_ITEM
+);
