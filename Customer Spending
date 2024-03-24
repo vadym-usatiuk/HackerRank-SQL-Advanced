@@ -1,0 +1,7 @@
+SELECT c.customer_name,
+       FORMAT(SUM(i.total_price), 6) AS amount_spent
+FROM customer c
+JOIN invoice i ON c.id = i.customer_id
+GROUP BY c.id, c.customer_name
+HAVING SUM(i.total_price) <= (SELECT 0.25 * AVG(total_price) FROM invoice)
+ORDER BY amount_spent DESC;
